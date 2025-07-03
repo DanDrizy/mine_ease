@@ -1,0 +1,94 @@
+
+        .active_cont {
+            color: yellow;
+            border-bottom: 2px solid yellow;
+        }
+        .ann-stats-grid {
+            width: 100%;
+            height: 80vh;
+        }
+        .announce {
+            padding: 20px;
+            width: 100%;
+            height: 95vh;
+            background: #fff;
+            border-radius: 20px;
+            overflow: auto;
+        }
+        .message {
+            padding: 20px;
+            border-radius: 20px;
+            overflow-y: auto;
+            font-size: 13px;
+        }
+        p {
+            text-align: center;
+            color: lightgray;
+            font-size: 12px;
+        }
+        .form {
+            padding: 20px;
+            border-radius: 20px;
+            overflow-y: auto;
+            font-size: 13px;
+        }
+        .form h3 {
+            color: #000;
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: darkgreen;
+        }
+        .form input[type="text"], 
+        .form input[type="email"], 
+        .form input[type="tel"], 
+        .form input[type="date"],
+        .form select,
+        .form textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            margin-bottom: 20px;
+        }
+        .form input[type="text"]:focus, 
+        .form input[type="email"]:focus, 
+        .form input[type="tel"]:focus,
+        .form input[type="date"]:focus,
+        .form select:focus,
+        .form textarea:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        .form button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .form button:hover {
+            background-color: #0056b3;
+        }
+        .form textarea {
+            height: 200px;
+            resize: none;
+        }
+        .form-group {
+            display: flex;
+            gap: 20px;
+        }
+        .form-group div {
+            flex: 1;
+        }
+        .success-message {
+            color: green;
+            text-align: center;
+            margin: 10px 0;
+        }
+        .error-message {
+            color: red;
+            text-align: center;
+            margin: 10px 0;
+        }
+   

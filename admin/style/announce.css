@@ -1,0 +1,206 @@
+
+        .active_dash {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        .form-container {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+        
+        .form-textarea {
+            min-height: 200px;
+            resize: vertical;
+        }
+        
+        .form-select {
+            background-color: #fff;
+        }
+        
+        .form-checkbox-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+        
+        .form-checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.2s;
+        }
+        
+        .btn-primary {
+            background-color: #304c8e;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #263c71;
+        }
+        
+        .btn-secondary {
+            background-color: #eee;
+            color: #333;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #ddd;
+        }
+        
+        .form-note {
+            font-size: 0.9rem;
+            color: #777;
+            margin-top: 5px;
+        }
+        
+        .form-header {
+            margin-bottom: 30px;
+        }
+        
+        .form-header h1 {
+            margin-bottom: 10px;
+            color: #304c8e;
+        }
+        
+        .form-header p {
+            color: #666;
+        }
+        
+        .input-group {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .input-group .form-group {
+            flex: 1;
+        }
+        
+        .editor-toolbar {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-bottom: none;
+            border-radius: 5px 5px 0 0;
+            padding: 10px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .editor-button {
+            background: none;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+            padding: 5px;
+            color: #555;
+            border-radius: 3px;
+        }
+        
+        .editor-button:hover {
+            background-color: #eee;
+        }
+        
+        .form-textarea-editor {
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
+        
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .back-button {
+            background-color: #eee;
+            color: #444;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        
+        .back-button i {
+            margin-right: 5px;
+        }
+        
+        .back-button:hover {
+            background-color: #ddd;
+        }
+        
+        /* Error message styles */
+        .error-container {
+            background-color: #ffebee;
+            color: #c62828;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border-left: 4px solid #c62828;
+        }
+        
+        .error-list {
+            margin: 5px 0 0 20px;
+            padding: 0;
+        }
+        
+        .error-list li {
+            margin-bottom: 5px;
+        }
+        
+        /* Field error highlight */
+        .field-error {
+            border-color: #c62828 !important;
+        }
+        
+        /* Success message */
+        .success-message {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border-left: 4px solid #2e7d32;
+        }
+    

@@ -1,0 +1,169 @@
+
+        .active-payroll {
+            background-color: #81C5B1;
+            transition: background-color 0.3s ease;
+            color: #1E1E1E;
+        }
+
+        .search {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #fff;
+            padding: 20px;
+            border-radius: 20px;
+            height: 5rem;
+        }
+        
+        .search input {
+            padding: 10px;
+            border-radius: 20px;
+            border: 1px solid #ddd;
+        }
+        
+        .search input:focus {
+            outline: none;
+            border-color: #81C5B1;
+        }
+
+        .search button {
+            padding: 10px 20px;
+            background-color: #81C5B1;
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        
+        .table-container {
+            background: #fff;
+            padding: 20px;
+            height: 100rem;
+            border-radius: 20px;
+            overflow: auto;
+        }
+        
+        .table-container table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+        
+        .table-container th, .table-container td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .table-container tr:hover {
+            background-color: #f1f1f1;
+            cursor: pointer;
+        }
+        
+        .table-container th {
+            background-color: #81C5B1;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .active-attend {
+            background-color: #e6f2ff !important;
+        }
+
+        .user-details {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            border-radius: 20px;
+            height: 8rem;
+            font-size: 12px;
+        }
+
+        .info-box {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+            width: 80%;
+        }
+
+        .image {
+            height: 100%;
+            width: 30%;
+        }
+        
+        .image img {
+            width: 80%;
+            height: 80%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .user-form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: start;
+            gap: 10px;
+            width: 70%;
+        }
+
+        .month {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            width: 30%;
+        }
+        
+        .month-header {
+            padding: 10px;
+            background: #81C5B1;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .month-header h2 {
+            margin: 0;
+            font-size: 16px;
+        }
+        
+        .year-selector {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 4px;
+            font-size: 14px;
+        }
+        
+        .month ul {
+            list-style: none;
+            padding: 10px;
+            margin: 0;
+            background: #81C5B1;
+            width: 100%;
+            overflow: auto;
+            text-align: center;
+        }
+
+        .month li {
+            text-align: left;
+            border: 1px solid #ddd;
+            display: inline-flex;
+            color: #fff;
+            padding: 2px;
+            margin: 2px;
+        }
+        
+        .paid-month {
+            background-color: #1E1E1E;
+            color: #fff !important;
+            font-weight: bold;
+        }
+    
+        

@@ -1,0 +1,106 @@
+
+
+    .active_dash {
+        color: yellow;
+        border-bottom: 2px solid yellow;
+    }
+    .admin-announce
+    {
+        width: 100%;
+
+    }
+    .bottom-grid-bottom
+    {
+        width: 100%;
+    }
+    .admin-announce h2 {
+        margin-bottom: 1rem;
+        font-size: 1rem;
+    }
+            
+    .admin-announce h1 {
+        font-size: 8rem;
+        margin: 0;
+        transition: all 0.3s ease;
+        color: #153D00;
+    }
+    
+    .stock-status{
+        width: 50%;
+    }
+    .table-content {
+        width: 100%;
+        padding: 5px;
+        background: #fff;
+        border-radius: 20px;
+        overflow: hidden;
+    }
+    
+    .table-content table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 12px;
+    }
+    
+    .table-content th, .table-content td {
+        padding: 10px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+    
+    .table-content th {
+        background-color: #f2f2f2;
+    }
+    
+    .table-content th:first-child {
+        text-align: left;
+    }
+    
+    .table-content th:last-child,
+    .table-content td:last-child {  
+        text-align: right;
+    }
+    
+    .profile-img {
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-right: 10px;
+    }
+    
+    .payroll-summary {
+        background: #fff;
+        padding: 15px;
+        border-radius: 10px;
+        margin-top: 20px;
+    }
+    
+    .payroll-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 8px;
+    }
+    
+    .payroll-total {
+        font-weight: bold;
+        border-top: 1px solid #ddd;
+        padding-top: 10px;
+        margin-top: 10px;
+    }
+
+    .announcement-item
+    {
+        background:rgb(211, 211, 211);
+        margin: 20px 0;
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+        justify-content: left;
+    }
+
+    .announcement-title
+    {
+        margin: 0 0 20px;
+    }
+    
