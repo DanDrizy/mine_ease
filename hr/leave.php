@@ -68,7 +68,11 @@ $leaveRequests = getLeaveRequests($conn);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HR Dashboard</title>
-    <link rel="stylesheet" href="style/style.css"> 
+    <link rel="stylesheet" href="style/style.css">
+    <!-- Include libraries for PDF and Excel export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
 <style>
     .active-leave {
@@ -216,6 +220,82 @@ $leaveRequests = getLeaveRequests($conn);
         background-color: #f8d7da;
         color: #721c24;
     }
+
+    /* Print/Export Button Styles */
+    .print-dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .print-btn {
+        padding: 10px 20px;
+        border-radius: 20px;
+        border: none;
+        background-color: #4CAF50;
+        color: white;
+        cursor: pointer;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .print-btn:hover {
+        background-color: #45a049;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        right: 0;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+        cursor: pointer;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #f1f1f1;
+    }
+
+    .print-dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .dropdown-arrow {
+        border: solid white;
+        border-width: 0 2px 2px 0;
+        display: inline-block;
+        padding: 3px;
+        transform: rotate(45deg);
+        margin-left: 5px;
+    }
+
+    @media print {
+        .no-print {
+            display: none !important;
+        }
+        .table-container {
+            box-shadow: none;
+            height: auto;
+        }
+        .search {
+            display: none;
+        }
+        .main-content {
+            margin: 0;
+        }
+    }
 </style>
 <body>
     <?php include 'main/slidebar.php'; ?>
@@ -233,19 +313,32 @@ $leaveRequests = getLeaveRequests($conn);
                         <div class="right-side left-side">
                             <input type="text" placeholder="Search Employee" class="search-input">
                             <button class="search-button">Search</button>
+                            
+                            <!-- Print/Export Dropdown -->
+                            <div class="print-dropdown">
+                                <button class="print-btn">
+                                    📄 Export
+                                    <span class="dropdown-arrow"></span>
+                                </button>
+                                <div class="dropdown-content">
+                                    <a onclick="printTable()">🖨️ Print</a>
+                                    <a onclick="exportToPDF()">📑 Export to PDF</a>
+                                    <a onclick="exportToExcel()">📊 Export to Excel</a>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
                     <div class="table-container">
                         <?php if (isset($_SESSION['message'])): ?>
-                            <div class="message success"><?php echo $_SESSION['message']; unset($_SESSION['message']); ?></div>
+                            <div class="message success no-print"><?php echo $_SESSION['message']; unset($_SESSION['message']); ?></div>
                         <?php endif; ?>
                         
                         <?php if (isset($_SESSION['error'])): ?>
-                            <div class="message error"><?php echo $_SESSION['error']; unset($_SESSION['error']); ?></div>
+                            <div class="message error no-print"><?php echo $_SESSION['error']; unset($_SESSION['error']); ?></div>
                         <?php endif; ?>
                         
-                        <table>
+                        <table id="leaveRequestsTable">
                             <thead>
                                 <tr>
                                     <th>Employee ID</th>
@@ -256,7 +349,7 @@ $leaveRequests = getLeaveRequests($conn);
                                     <th>End Date</th>
                                     <th>Reason</th>
                                     <th>Status</th>
-                                    <th>Action</th>
+                                    <th class="no-print">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -275,7 +368,7 @@ $leaveRequests = getLeaveRequests($conn);
                                             <td><?php echo htmlspecialchars($request['end_date']); ?></td>
                                             <td><?php echo htmlspecialchars($request['reason']); ?></td>
                                             <td><?php echo htmlspecialchars($request['status']); ?></td>
-                                            <td>
+                                            <td class="no-print">
                                                 <form method="post" style="display: inline;">
                                                     <input type="hidden" name="request_id" value="<?php echo $request['id']; ?>">
                                                     <input type="hidden" name="action" value="accept">
@@ -297,5 +390,134 @@ $leaveRequests = getLeaveRequests($conn);
             </div>
         </div>
     </div>
+
+    <script>
+        // Function to print the table
+        function printTable() {
+            window.print();
+        }
+
+        // Function to export table to PDF
+        function exportToPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            
+            // Add title
+            doc.setFontSize(18);
+            doc.text('Leave Requests Report', 14, 22);
+            
+            // Add date
+            doc.setFontSize(11);
+            doc.text('Generated on: ' + new Date().toLocaleDateString(), 14, 30);
+            
+            // Get table data
+            const table = document.getElementById('leaveRequestsTable');
+            const headers = [];
+            const data = [];
+            
+            // Extract headers (excluding Action column)
+            const headerCells = table.querySelectorAll('thead th');
+            headerCells.forEach((cell, index) => {
+                if (!cell.classList.contains('no-print')) {
+                    headers.push(cell.textContent.trim());
+                }
+            });
+            
+            // Extract data (excluding Action column)
+            const rows = table.querySelectorAll('tbody tr');
+            rows.forEach(row => {
+                const rowData = [];
+                const cells = row.querySelectorAll('td');
+                cells.forEach((cell, index) => {
+                    if (!cell.classList.contains('no-print')) {
+                        rowData.push(cell.textContent.trim());
+                    }
+                });
+                if (rowData.length > 0) {
+                    data.push(rowData);
+                }
+            });
+            
+            // Generate PDF table
+            doc.autoTable({
+                head: [headers],
+                body: data,
+                startY: 40,
+                styles: {
+                    fontSize: 9,
+                    cellPadding: 2,
+                },
+                headStyles: {
+                    fillColor: [72, 61, 139],
+                    textColor: 255,
+                },
+                alternateRowStyles: {
+                    fillColor: [240, 240, 240],
+                },
+            });
+            
+            // Save the PDF
+            doc.save('leave_requests_' + new Date().toISOString().split('T')[0] + '.pdf');
+        }
+
+        // Function to export table to Excel
+        function exportToExcel() {
+            const table = document.getElementById('leaveRequestsTable');
+            const ws = XLSX.utils.table_to_sheet(table);
+            
+            // Remove Action column from the worksheet
+            const range = XLSX.utils.decode_range(ws['!ref']);
+            const actionColumnIndex = range.e.c; // Last column index
+            
+            // Delete the Action column
+            for (let row = range.s.r; row <= range.e.r; row++) {
+                const cellAddress = XLSX.utils.encode_cell({r: row, c: actionColumnIndex});
+                if (ws[cellAddress]) {
+                    delete ws[cellAddress];
+                }
+            }
+            
+            // Update the range
+            ws['!ref'] = XLSX.utils.encode_range({
+                s: {r: range.s.r, c: range.s.c},
+                e: {r: range.e.r, c: range.e.c - 1}
+            });
+            
+            // Create workbook and add worksheet
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, 'Leave Requests');
+            
+            // Save the file
+            XLSX.writeFile(wb, 'leave_requests_' + new Date().toISOString().split('T')[0] + '.xlsx');
+        }
+
+        // Search functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.querySelector('.search-input');
+            const searchButton = document.querySelector('.search-button');
+            const table = document.getElementById('leaveRequestsTable');
+            
+            function performSearch() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const rows = table.querySelectorAll('tbody tr');
+                
+                rows.forEach(row => {
+                    const text = row.textContent.toLowerCase();
+                    if (text.includes(searchTerm)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            }
+            
+            searchButton.addEventListener('click', performSearch);
+            searchInput.addEventListener('keyup', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+        });
+    </script>
 </body>
 </html>

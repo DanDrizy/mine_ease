@@ -180,7 +180,7 @@
     <div class="main-content">
         <?php include 'main/header.php'; ?>
         
-        <div class="stats-grid">
+        <!-- <div class="stats-grid">
             <div class="table-content">
                 <table>
                     <tr>
@@ -220,7 +220,7 @@
                     ?>
                 </table>
             </div>
-        </div>
+        </div> -->
         
         <div class="bottom-grid">
             <div class="stock-status">

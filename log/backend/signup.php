@@ -14,8 +14,11 @@ if(isset($_POST['signup'])){
     $phone = $_POST['phone'];
     $department = $_POST['department'];
     $user_type = $_POST['user_type'];
+    $date_time = date("Y-m-d H:i:s");
 
-    if($password !== $cpassword) {
+    try{
+
+         if($password !== $cpassword) { 
         echo "<script>alert('Passwords do not match. Please try again.');</script>";
         echo "<script>window.location.href='../log.php';</script>";
         exit();
@@ -30,7 +33,7 @@ if(isset($_POST['signup'])){
         echo "<script>window.location.href='../log.php';</script>";
     } else {
         // Insert the new user into the database
-        $insert_query = "INSERT INTO users (name, username, email, password, phone, registration_date, department, user_type) VALUES ('$name', '$username', '$email', '$password', '$phone', NOW(), '$department', '$user_type')";
+        $insert_query = "INSERT INTO users (name, username, email, password, phone, registration_date, department, user_type) VALUES ('$name', '$username', '$email', '$password', '$phone', '$date_time', '$department', '$user_type')";
         
         if(mysqli_query($conn, $insert_query)){
             echo "<script>alert('Registration successful! You can now log in.');</script>";
@@ -40,6 +43,14 @@ if(isset($_POST['signup'])){
             echo "<script>window.location.href='../log.php';</script>";
         }
     }
+
+    } catch(Exception $e){
+        echo "<script>alert('There was a problem in registering please try again');</script>";
+        echo "<script>window.location.href='../log.php';</script>";
+        exit();
+    }
+
+   
 }
 
 ?>
